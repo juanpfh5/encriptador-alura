@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="img/icon_page.png">
   <title>Encriptador de texto</title>
 </head>
 <body>
@@ -24,10 +25,10 @@
         </div>
         <textarea id="text_to_work" class="workspace__form__text_to_work" name="text" placeholder="Ingresa el texto aquí ;)"></textarea>
         <br>
-        <!-- <div class="workspace__form__div_text">
+        <div id="workspace__form__div_text">
           <img src="img/icon_exclamation.png" alt="Ícono de exclamación" class="workspace__form__div_text__img">
           <p class="workspace__form__div_text__text">Solo letras minúsculas y sin acentos</p>
-        </div> -->
+        </div>
         <div class="workspace__form__text__btn">
           <button onclick="encode_text()" class="workspace__form_btn_encode form_btn">Encriptar</button>
           <button onclick="decode_text()" class="workspace__form_btn_decode form_btn">Desencriptar</button>
@@ -35,17 +36,17 @@
       </div>
     </div>
     <div class="result">
-      <div id="result__div" class="result__div">
+      <div id="result__div">
         <img src="img/caitlyn.gif" alt="Imagen de texto no encontrado" id="result__div__img" class="result__div__img">
         <h3 id="result__div__h3" class="result__div__h3">Ningún mensaje fue encontrado</h3>
         <br>
         <p id="result__div__text" class="result__div__text">Ingresa el texto que desees encriptar o desencriptar.</p>
       </div>
-      <button onclick="copy_text()" id="result__btn_copy" class="form_btn result__btn_copy" >Copiar</button>
+      <button onclick="copy_text()" id="result__btn_copy" class="form_btn" >Copiar</button>
     </div>
   </main>
   <footer>
-    <p class="footer__text">juanpfh. Oracle ONE. 2024</p>
+    <p class="footer__text">juanpfh5. Oracle ONE. 2024</p>
   </footer>
   <script src="js/app.js"></script>
 </body>

@@ -112,7 +112,7 @@ main {
   font-weight: 400;
 }
 
-.workspace__form__div_text {
+#workspace__form__div_text {
   display: flex;
   flex-direction: row;
   text-align: left;
@@ -127,6 +127,12 @@ main {
   height: auto;
   width: 2.5%;
   padding: 0 1rem 0 0;
+}
+
+.workspace__form__div_text__text {
+  font-size: 0.75rem;
+  color: var(--tertiary-color);
+  font-weight: 200;
 }
 
 .workspace__form__text__btn {
@@ -190,7 +196,7 @@ main {
   box-shadow: 7px 7px 3px 0px rgba(0, 0, 0, 0.1);
 }
 
-.result__div {
+#result__div {
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
@@ -218,7 +224,7 @@ main {
   color: var(--primary-color);
 }
 
-.result__btn_copy {
+#result__btn_copy {
   border-color: var(--quaternary-color);
   color: var(--quaternary-color);
   background-color: var(--tertiary-color);
@@ -279,6 +285,10 @@ footer {
 
   .workspace__form__text_to_work {
     font-size: 1.3rem;
+  }
+
+  .workspace__form__div_text {
+    display: flex;
   }
 
   .workspace__form__div_text__img {

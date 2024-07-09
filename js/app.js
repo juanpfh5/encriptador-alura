@@ -1,41 +1,65 @@
-// document.getElementById('text_to_work').addEventListener('input', function (e) {
-//   const regex = /[^a-z\s]/g;
-//   e.target.value = e.target.value.replace(regex, '');
-// });
-
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () { // Escoger un gif aleatorio al cargar la página
   random_gif();
 });
 
-function getText() {
+let text_to_work = document.getElementById('text_to_work');
+
+function corregirTexto(texto) { // Corregir texto para que nsiga los estándares del encriptado Alura
+  return texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+text_to_work.addEventListener('input', function (e) { // Corregir texto en tiempo real
+  let select = document.getElementById('type_encode');
+  let selectedOption = select.options[select.selectedIndex].value;
+
+  if (selectedOption === '1') { // Alura
+    e.target.value = corregirTexto(e.target.value);
+  }
+});
+
+const selectElement = document.querySelector('#type_encode'); 
+
+selectElement.addEventListener('change', (event) => { // Mostrar o no la advertencia debajo del text_to_work
+  const seleccionado = event.target.value;
+  let workspace__form__div_text = document.getElementById('workspace__form__div_text');
+
+  if (seleccionado === '1') { // Alura
+    workspace__form__div_text.style.display = 'flex';
+    text_to_work.value = corregirTexto(text_to_work.value);
+  } else {
+    workspace__form__div_text.style.display = 'none';
+  }
+});
+
+function getText() { // Obtener el texto a trabajar
   let text = document.getElementById('text_to_work').value;
 
   return text;
 }
 
-function getOption() {
+function getOption() { // Obtener la opción seleccionada
   let select = document.getElementById('type_encode');
   let selectedOption = select.options[select.selectedIndex].value;
 
   return selectedOption;
 }
 
-function encode_text() {
+function encode_text() { // Codificar el texto
   selectedOption = getOption();
 
-  switch(selectedOption) {
+  switch (selectedOption) {
     case '1':
       // Alura
       text = alura(true);
       break;
-      case '2':
-        // Base64
-        text = btoa(getText());
-        break;
-      case '3':
-        // Cesar
-        text = cesar(getText(), 3);
-        break;
+    case '2':
+      // Base64
+      text = btoa(getText());
+      break;
+    case '3':
+      // Cesar
+      text = cesar(getText(), 3);
+      break;
     default:
       console.log('Opción no válida');
       return;
@@ -44,10 +68,10 @@ function encode_text() {
   clear_text(text);
 }
 
-function decode_text() {
+function decode_text() { // Decodificar el texto
   selectedOption = getOption();
 
-  switch(selectedOption) {
+  switch (selectedOption) {
     case '1':
       // Alura
       text = alura(false);
@@ -68,15 +92,15 @@ function decode_text() {
   clear_text(text);
 }
 
-function alura(encode) {
+function alura(encode) { // Encriptado Alura
   let text = getText();
   let result = '';
 
-  if (encode) {
+  if (encode) { // Codificar
     for (let i = 0; i < text.length; i++) {
       let char = text[i];
-      
-      switch(char) {
+
+      switch (char) {
         case 'a':
           result += 'ai';
           break;
@@ -98,7 +122,7 @@ function alura(encode) {
     }
 
     return result;
-  } else {
+  } else { // Decodificar
     text = text.replace(/ai/g, 'a');
     text = text.replace(/enter/g, 'e');
     text = text.replace(/imes/g, 'i');
@@ -109,7 +133,7 @@ function alura(encode) {
   }
 }
 
-function cesar(text, shift) {
+function cesar(text, shift) { // Encriptado Cesar
   const alphabet = 'abcdefghijklmnopqrstuvwxyz';
   const alphabet_upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   let result = '';
@@ -131,7 +155,7 @@ function cesar(text, shift) {
 }
 
 
-function clear_text(final_text) {
+function clear_text(final_text) { // Mostrar el resultado
   let text = text_to_work.value;
   const image = document.getElementById('result__div__img');
   let text_h3_result = document.getElementById('result__div__h3');
@@ -148,7 +172,7 @@ function clear_text(final_text) {
     text_h3_result.textContent = 'Ningún mensaje fue encontrado';
     result__div.style.justifyContent = 'center';
     result__btn_copy.style.display = 'none';
-  } else {
+  } else { 
     image.style.display = 'none';
     text_p_result.style.display = 'none';
     text_h3_result.textContent = final_text;
@@ -157,7 +181,7 @@ function clear_text(final_text) {
   }
 }
 
-function copy_text() {
+function copy_text() { // Copiar el texto al portapapeles
   const h3Element = document.getElementById('result__div__h3');
   const textArea = document.createElement('textarea');
   textArea.value = h3Element.textContent;
@@ -168,9 +192,9 @@ function copy_text() {
   document.body.removeChild(textArea);
 }
 
-function random_gif() {
+function random_gif() { // Escoger un gif aleatorio
   const img = document.getElementById('result__div__img');
   const rute = ["img/caitlyn.gif", "img/puppet_black_box.gif"]
-  
+
   img.src = rute[Math.floor(Math.random() * rute.length)];
 }
